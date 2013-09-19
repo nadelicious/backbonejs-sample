@@ -1,4 +1,5 @@
 backbonejs-sample
 =================
 
-wa pa jud mahuman sir.. view pa jud tawun! 
+wa pa jud mahuman sir....ang app.js para sa akoa backbone wa jud na mahuman pa.. :) 
+sorry kau sir :)
