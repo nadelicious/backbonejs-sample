@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/css/bootstrap.css"> 
 <link rel="stylesheet" href="/css/style.css"> 
 </head>
-<body>
+<body data="<%= DATA %>">
 	<div class="container">
 		<div class="navbar-header">
 			<h4>Manage Contacts</4>
@@ -25,7 +25,7 @@
 						</th>
 					</tr>	
 				</thead>
-				<tbody> 
+				<tbody id="contacts-container"> 
 					<tr>
 						<td>#</td>
 						<td><input type="text" name="username"  class="form-control"  placeholder="Username" autocomplete="off" required></td>
@@ -33,23 +33,24 @@
 						<td><input type="text" name="email"  class="form-control"  placeholder="Email Address" autocomplete="off" required></td>
 						<td>
 							<div>
-								<a href="javascript:void(0);" title="save"><i class="glyphicon glyphicon-plus-sign"></i><span>Save</span></a>
+								<a href="javascript:void(0);" title="save" class="add"><i class="glyphicon glyphicon-plus-sign"></i><span>Save</span></a>
 							</div>	
 						</td>
 					</tr>
-					<tr>
+					
+					<script id="personTemplate" type="text/template">
 						<td>1</td>
-						<td><input type="text" name="username"  class="form-control"  placeholder="Username" autocomplete="off" required></td>
-						<td><input type="text" name="contact"  class="form-control"  placeholder="Contact no." autocomplete="off" required></td>
-						<td><input type="text" name="email"  class="form-control"  placeholder="Email Address" autocomplete="off" required></td>
+						<td><input type="text" name="username"  value="{{ username }}" class="form-control"  placeholder="Username" autocomplete="off" required></td>
+						<td><input type="text" name="contact"  value="{{ contact }}" class="form-control"  placeholder="Contact no." autocomplete="off" required></td>
+						<td><input type="text" name="email"  value="{{ email }}"  class="form-control"  placeholder="Email Address" autocomplete="off" required></td>
 						<td>
 							<div>
-								<a href="javascript:void(0);"  title="Update"><i class="glyphicon glyphicon-download"></i><span>Update</span></a> 
+								<a href="javascript:void(0);"  title="Update" class="update"><i class="glyphicon glyphicon-download"></i><span>Update</span></a> 
 								&nbsp; &nbsp;
-								<a href="javascript:void(0);"  title="Delete"><i class="glyphicon glyphicon-trash"></i><span>Delete</span></a> 
+								<a href="javascript:void(0);"  title="Delete" class="delete"><i class="glyphicon glyphicon-trash"></i><span>Delete</span></a> 
 							</div>	
 						</td>
-					</tr>
+					</script>
 				</tbody>
 			</table>
 		</div>	
@@ -64,4 +65,5 @@
 <script type="text/javascript" src="/js/modernizr.js"> </script>
 <script type="text/javascript" src="/js/underscore.js"> </script>
 <script type="text/javascript" src="/js/backbone.js"> </script>
+<script type="text/javascript" src="/js/app.js"> </script>
 </html>

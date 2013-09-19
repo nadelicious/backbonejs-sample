@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var route =require('./routes/route.js');
 var app =express();
 
-mongoose.connect('localhost', 'db_project');
+mongoose.connect('localhost', 'db_contacts');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
@@ -22,5 +22,9 @@ app.configure(function(){
 });
 
 app.get('/',route.getMain);
+app.post('/add',route.postAddContact);
+app.get('/update',route.postUpdateContact);
+app.get('/delete',route.postDeleteContact);
+
 app.listen(process.env.PORT || 3000);
 console.log('Application is running at localhost:3000');
