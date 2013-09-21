@@ -5,8 +5,6 @@ var CONTACTS = mongoose.model('cl_contacts', {
   email: String
 });
 
-
-
 exports.fetchContact = function(obj,callback){
 	CONTACTS.find(obj,function(err,res){
 		if(err) return callback(err);
@@ -22,15 +20,15 @@ exports.saveContact = function(obj,callback){
 	});
 }
 
-exports.updateContact = function(qry, obj, callback){
-	CONTACTS.update(qry, { $set: obj }, {}, function(err, data){
+exports.updateContact = function(id, obj, callback){
+	CONTACTS.findByIdAndUpdate(id, { $set: obj }, {}, function(err, data){
 		if(err) return callback(err);
 		callback(null,1);	
 	});
 }
 
-exports.deleteContact = function(qry,callback){
-	CONTACTS.remove(qry,function(err,res){
+exports.deleteContact = function(id,callback){
+	CONTACTS.findByIdAndRemove(id,function(err,res){
 		if(err) return callback(err);
 		callback(null,1);
 	});

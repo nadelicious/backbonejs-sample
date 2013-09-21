@@ -1,46 +1,60 @@
-//
 var  contacts = require('../model/contacts_model.js');
-exports.getMain = function(req,res){
-	contacts.fetchContact({},function(err,data){
+
+exports.corsSettings = function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'origin, content-type, accept');
+	// deal with OPTIONS method during a preflight request
+	if (req.method === 'OPTIONS') {
+		res.send(200);
+	} else {
+		next();
+	}
+}
+
+exports.getContacts = function(req,res){
+	contacts.fetchContact({},function(err,docs){
 		if(err){
 			res.statusCode= 404;
-			console.log(error);
+			throw err;
 		}
-		if(data){
-			res.render('index.ejs',{
-				DATA: JSON.stringify(data)
-			});
-		}	
+		 res.send(docs);
 	});
 }
 
-exports.postAddContact = function(req,res){
-	contacts.saveContact(req.body,function(err,data){
+exports.addContact = function(req,res){
+	contacts.saveContact(req.body,function(err,docs){
 		if(err){
 			res.statusCode= 404;
-			console.log(error);
+			throw err;
 		}
-		if(data) res.redirect('/');
+		res.send(200, docs);
 	});
 }
 
 
-exports.postUpdateContact = function(req,res){
-	contacts.updateContact({_id: req.body._id},req.body,function(err,data){
+exports.updateContact = function(req,res){
+	var id = req.params.id;
+	var obj = {
+		username: req.body.username,
+		contact: req.body.contact,
+		email: req.body.email
+	};
+	contacts.updateContact(id,obj,function(err,docs){
 		if(err){
 			res.statusCode= 404;
-			console.log(error);
+			throw err;
 		}
-		if(data) res.redirect('/');
+		res.send(200, docs);
 	});
 }
 
-exports.postDeleteContact = function(req,res){
-	contacts.deleteContact({_id: req.body._id},function(err,data){
+exports.deleteContact = function(req,res){
+	var id = req.params.id;
+	contacts.deleteContact(id,function(err,docs){
 		if(err){
 			res.statusCode= 404;
-			console.log(error);
+			throw err;
 		}
-		if(data) res.redirect('/');
 	});
 }

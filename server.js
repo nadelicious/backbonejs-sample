@@ -11,20 +11,18 @@ db.once('open', function callback() {
 });
 
 app.configure(function(){
-	app.set('view engine', 'ejs');
-	app.set('views', __dirname + '/public/views');
 	app.locals.pretty = true;
-	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
+	app.use(route.corsSettings);
 	app.use(express.methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use(app.router);
 });
 
-app.get('/',route.getMain);
-app.post('/add',route.postAddContact);
-app.get('/update',route.postUpdateContact);
-app.get('/delete',route.postDeleteContact);
+app.get('/contacts',route.getContacts);
+app.post('/contacts',route.addContact);
+app.put('/contacts/:id',route.updateContact);
+app.delete('/contacts/:id',route.deleteContact);
 
 app.listen(process.env.PORT || 3000);
 console.log('Application is running at localhost:3000');
