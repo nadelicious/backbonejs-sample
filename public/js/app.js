@@ -80,9 +80,9 @@ App.Views.AddContact = Backbone.View.extend({
 	el: 'a.add',
 
 	initialize: function() {
-		this.username= $('#add-contacts-container td input[name=username]')
-		this.contact= $('#add-contacts-container td input[name=contact]')
-		this.email= $('#add-contacts-container td input[name=email]')
+		this.username= $('#add-contacts-container td input[name=username]');
+		this.contact= $('#add-contacts-container td input[name=contact]');
+		this.email= $('#add-contacts-container td input[name=email]');
 	},
 
 	events: {
@@ -113,7 +113,7 @@ App.Views.AddContact = Backbone.View.extend({
 ----------------------------------------------------------
 */
 App.Views.Contacts = Backbone.View.extend({
-	tagName: 'div',
+	tagName: 'tbody',
 	
 	initialize: function() {
 		this.collection.on('add', this.addOne, this);
@@ -125,7 +125,6 @@ App.Views.Contacts = Backbone.View.extend({
 	},
 
 	addOne: function(contact) {
-
 		var contactView = new App.Views.Contact({ model: contact });
 		this.$el.append(contactView.render().el);
 	}
@@ -190,7 +189,6 @@ App.Views.Contact = Backbone.View.extend({
 	},
 
 	deleteContact: function() {
-		this.remove();
 		this.model.destroy();
 	},
 

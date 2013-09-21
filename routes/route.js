@@ -23,7 +23,12 @@ exports.getContacts = function(req,res){
 }
 
 exports.addContact = function(req,res){
-	contacts.saveContact(req.body,function(err,docs){
+	var obj ={
+	 username: req.body.username,
+	 contact:req.body.contact,
+	 email:req.body.email
+	};
+	contacts.saveContact(obj,function(err,docs){
 		if(err){
 			res.statusCode= 404;
 			throw err;
