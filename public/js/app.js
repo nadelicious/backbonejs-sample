@@ -4,6 +4,7 @@
 ----------------------------------------------------------
 */
 (function() {
+	window.COUNT=1;
 	window.App = {
 		Models: {},
 		Collections: {},
@@ -66,7 +67,7 @@ App.Views.App = Backbone.View.extend({
 	initialize: function() {
 		var addContactView = new App.Views.AddContact({ collection: App.contacts });
 		var allContactsView = new App.Views.Contacts({ collection: App.contacts });
-		$('tbody#contacts-container').append($(allContactsView.render().el).children());
+		$('table#contacts-container').append($(allContactsView.render().el));
 	}
 });
 
@@ -125,6 +126,8 @@ App.Views.Contacts = Backbone.View.extend({
 	},
 
 	addOne: function(contact) {
+		contact.attributes.__v = COUNT++;
+		console.log(contact.attributes.__v);
 		var contactView = new App.Views.Contact({ model: contact });
 		this.$el.append(contactView.render().el);
 	}
@@ -193,7 +196,8 @@ App.Views.Contact = Backbone.View.extend({
 	},
 
 	render: function() {
-		this.$el.html( this.template( this.model.toJSON() ) );
+		var obj =this.model.toJSON();
+		this.$el.html( this.template( obj ) );
 		return this;
 	},
 
@@ -232,7 +236,6 @@ App.contacts = new App.Collections.Contacts;
 App.contacts.fetch().then(function() {
 	new App.Views.App({ collection: App.contacts });
 });
-
 
 
 

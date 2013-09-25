@@ -16,21 +16,21 @@ exports.saveContact = function(obj,callback){
 	var contacts = new CONTACTS(obj);
 	contacts.save(function(err,res){
 		if(err) return callback(err);
-		callback(null,1);
+		callback(null,res);
 	});
 }
 
 exports.updateContact = function(id, obj, callback){
-	CONTACTS.findByIdAndUpdate(id, { $set: obj }, {}, function(err, data){
+	CONTACTS.findByIdAndUpdate(id, { $set: obj }, {}, function(err, res){
 		if(err) return callback(err);
-		callback(null,1);	
+		callback(null,res);	
 	});
 }
 
 exports.deleteContact = function(id,callback){
 	CONTACTS.findByIdAndRemove(id,function(err,res){
 		if(err) return callback(err);
-		callback(null,1);
+		callback(null,res);
 	});
 }
 
