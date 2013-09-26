@@ -61,5 +61,6 @@ exports.deleteContact = function(req,res){
 			res.statusCode= 404;
 			throw err;
 		}
+		res.send(200, docs);
 	});
 }
